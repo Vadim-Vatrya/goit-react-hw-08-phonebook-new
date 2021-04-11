@@ -1,30 +1,38 @@
-// import { useEffect } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Switch, Redirect} from 'react-router-dom';
 
-import { Switch, Route, Redirect } from 'react-router-dom';
-// import { getLoading } from './redux/contacts/contact-selectors';
-// import {fetchContacts} from './redux/contacts/contact-operations';
+ 
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
+import authOperations from './redux/auth/auth-operations'
 
-import Container from './components/Container';
-import ContactForm from './components/ContactForm';
-import Filter from './components/Filter';
-import ContactList from './components/ContactList';
-import Loader from './components/Loader';
-
+import AppBar from './components/AppBar';
+import Container from './views/Container';
+import HomeView from './views/HomeView';
+import ContactsView from './views/ContactsView';
+import RegisterView from './views/RegisterView';
+import LoginView from './views/LoginView';
 
 
 const App = () => {
+   
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch(authOperations.getCurrentUser());
+    }, [dispatch]);
 
     return (
         <Container>
             <AppBar />
 
             <Switch>
-                <Route exact path="/" component={HomeView} />
-                <Route path="/contacts" component={ContactsView} />
-                <Route path="/register" component={RegisterView} />
-                <Route path="/login" component={LoginView} />
-                <Redirect to="/" />
+            <PublicRoute exact path="/"component={HomeView} />
+            <PrivateRoute path='/contacts'  redirectTo="/login" component ={ContactsView} />
+            <PublicRoute path="/register" restricted redirectTo="/contacts" component={RegisterView}/>
+            <PublicRoute path="/login" restricted redirectTo="/contacts" component={LoginView}/>
+            <Redirect to="/" />
             </Switch>
         </Container>
         
@@ -34,42 +42,3 @@ const App = () => {
 
 export default App;
 
-
-
-
-// const App = () => {
-//     // const contacts = useSelector(getContacts);
-//     const loading = useSelector(getLoading);
-//     const dispatch = useDispatch();
-
-//     useEffect(() => {
-//         dispatch(fetchContacts());
-//     }, [dispatch]);
-
-
-//     return (
-//     <Container>
-//         <h1>Phonebook</h1>
-//         <ContactForm />
-
-//         <h2>Contacts</h2>
-//         {/* {loading && <Loader />} */}
-//         <Loader
-//           type="Puff"
-//           color="#000"
-//           height={70}
-//           width={70}
-//           visible={loading}
-//         />
-//         {/* {contacts.length > 0 
-//         ? ( */}
-//         <>
-//          <Filter />
-//          <ContactList />
-//         </>
-//         {/* )
-//         : (<p>No contacts</p>)} */}
-       
-//     </Container>
-//     )
-// };
