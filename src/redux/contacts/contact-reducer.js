@@ -11,16 +11,26 @@ import {
   deleteContactRequest,
   deleteContactSuccess,
   deleteContactError,
-  changeFilter
+  changeFilter,
+  updateContactRequest,
+  updateContactSuccess,
+  updateContactError,
 } from './contact-actions';
+import authActions from '../../redux/auth/auth-actions';
+
 // import { fetchContacts, addContact, deleteContact } from './contact-operations';
 
-// const initialState = [];
-const itemsReducer = createReducer([], {
+const initialState = [];
+const itemsReducer = createReducer(initialState, {
   [fetchContactsSuccess]: (_, { payload }) => payload,
-  [addContactSuccess]: (state, { payload }) => [payload, ...state],
+  [addContactSuccess]: (state, { payload }) => [...state, payload],
   [deleteContactSuccess]: (state, { payload }) =>
          state.filter(({ id }) => id !== payload),
+         [updateContactSuccess]: (state, action) =>
+    state.map(contact =>
+      contact.id === action.payload.id ? action.payload : contact,
+    ),
+  [authActions.logoutSuccess]: () => [],
 });
 
 const filterReducer = createReducer('', {
@@ -37,10 +47,19 @@ const LoadingReducer = createReducer(false, {
   [deleteContactRequest]: () => true,
   [deleteContactSuccess]: () => false,
   [deleteContactError]: () => false,
+  [updateContactRequest]: () => true,
+  [updateContactSuccess]: () => false,
+  [updateContactError]: () => false,
 });
 
+const setError = (_, { payload }) => payload;
 
-
+const error = createReducer(null, {
+  [fetchContactsError]: setError,
+  [addContactError]: setError,
+  [deleteContactError]: setError,
+  [updateContactError]: setError,
+});
 
 // const itemsReducer = createReducer([], {
 //     [fetchContacts.fulfilled]: (_, { payload }) => payload,
@@ -71,6 +90,7 @@ const contactsReducer = combineReducers({
     items: itemsReducer,
     filter: filterReducer,
     loading: LoadingReducer,
+    error
 });
 
 export default contactsReducer;

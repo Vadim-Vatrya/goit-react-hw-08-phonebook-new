@@ -9,7 +9,7 @@ const loginSuccess = createAction('auth/loginSuccess');
 const loginError = createAction('auth/loginError');
 
 const logoutRequest = createAction('auth/logoutRequest');
-const logoutSuccess = createAction('auth/logoutrSuccess');
+const logoutSuccess = createAction('auth/logoutSuccess');
 const logoutError = createAction('auth/logoutError');
 
 const getCurrentUserRequest = createAction('auth/getCurrentUserRequest');
