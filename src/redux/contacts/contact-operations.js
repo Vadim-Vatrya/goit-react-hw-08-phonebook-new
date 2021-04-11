@@ -97,3 +97,18 @@ export const updateContact = (id, name, number) => dispatch => {
 //       }
 //   },
 // );
+
+// export const updateContact = createAsyncThunk(
+//     'contacts/updateContact',
+//     async ({ contactId, name, number }, { rejectWithValue }) => {
+//         try {
+//             const { data } = await axios.patch(`/contacts/${contactId}`, {
+//                 name,
+//                 number,
+//             });
+//             return data;
+//         } catch (error) {
+//             return rejectWithValue(error);
+//         }
+//     },
+// );
