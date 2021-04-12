@@ -3,6 +3,23 @@ import { NavLink } from 'react-router-dom';
 
 import authSelectors from '../../redux/auth/auth-selectors';
 
+// import styles from './Navigation.module.scss';
+
+const style = {
+  link: {
+    display: 'inline-block',
+    textDecoration: 'none',
+    padding: 12,
+    fontWeight: 700,
+    fontSize: '18px',
+    color: '#2A363B',
+  },
+  activeLink: {
+    color: '#23b1e7',
+  },
+};
+
+
 const Navigation = () => {
   const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
 
@@ -11,16 +28,16 @@ const Navigation = () => {
       <NavLink
       exact
       to='/'
-      // className={s.link}
-      // activeClassName={s.activeLink}
+      style={style.link}
+           activeStyle={style.activeLink}
       >
         Home
       </NavLink>
       {isAuthenticated && (
         <NavLink
         to='/contacts'
-        // className={s.link}
-        // activeClassName={s.activeLink}
+        style={style.link}
+           activeStyle={style.activeLink}
         >
           Contacts
         </NavLink>

@@ -5,24 +5,24 @@ import authSelectors from '../../redux/auth/auth-selectors';
 import Navigation from '../Navigation';
 import AuthNav from '../AuthNav';
 import UserMenu from '../UserMenu';
+import Container from '../Container';
 
-const styles = {
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottom: '1px solid #2A363B',
-  },
-};
+import styles from './AppBar.module.scss';
+
+
 
 const AppBar = () => {
   const isAuthenticated  = useSelector(authSelectors.getIsAuthenticated );
 
   return (
-    <header style={styles.header}>
-    <Navigation />
-    {isAuthenticated  ? <UserMenu /> : <AuthNav />}
-  </header>
+    <header className={styles.header}>
+      <Container>
+        <div className={styles.section}>
+        <Navigation />
+        {isAuthenticated  ? <UserMenu /> : <AuthNav />}
+        </div>
+      </Container>
+    </header>
   )
 
 }

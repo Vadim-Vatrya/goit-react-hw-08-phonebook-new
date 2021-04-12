@@ -9,7 +9,7 @@ import PublicRoute from './components/PublicRoute';
 import authOperations from './redux/auth/auth-operations'
 
 import AppBar from './components/AppBar';
-import Container from './views/Container';
+import Container from './components/Container';
 import Loader from './components/Loader';
 // import HomeView from './views/HomeView';
 // import ContactsView from './views/ContactsView';

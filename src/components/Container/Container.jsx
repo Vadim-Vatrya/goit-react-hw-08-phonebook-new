@@ -2,17 +2,24 @@ import PropTypes from 'prop-types';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
-  container:{
-    padding: '30px',
-  width: '400px',
-    margin:{
-  left:'auto',
-  top: '40px',
-  right: 'auto', 
-  bottom: '40px'
-},
-    backgroundColor: '#ece6f2 '
-  }
+  container: {
+    margin: {
+      right: 'auto',
+      left: 'auto',
+    },
+    padding: '20px',
+    width: '280px',
+  },
+  '@media (min-width: 720px)': {
+    container: {
+      width: 680,
+    },
+  },
+  '@media (min-width: 1200px)': {
+    container: {
+      width: 1160,
+    },
+  },
 
 })
 

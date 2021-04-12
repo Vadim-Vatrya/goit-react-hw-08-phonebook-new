@@ -1,25 +1,21 @@
 import React from 'react';
+import styles from './HomeView.module.scss';
+import Container from '../../components/Container';
+// import palette from '../../images/palette.jpg';
 
-const styles = {
-  container: {
-    minHeight: 'calc(100vh - 50px)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontWeight: 500,
-    fontSize: 48,
-    textAlign: 'center',
-  },
-};
 
 const HomeView = () => (
-  <div style={styles.container}>
-    <h1 style={styles.title}>
-      Phonebook
+  <Container>
+    <h1 className={styles.title}>
+     Wellcome to Phonebook
     </h1>
-  </div>
+    {/* <img
+                className={styles.HomeImg}
+                src={palette}
+                alt="Home page of our phonebook"
+                width="600"
+            /> */}
+  </Container>
 );
 
 export default HomeView;
